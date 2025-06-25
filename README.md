@@ -47,7 +47,55 @@ Planned:
 - UI improvements  
 - Multi-data center testing
 
+## Setup Couchbase Server and Sync Gateway locally
+Execute below commands to run couchbase server and sync gateway locally. There will be 100 responders and 5 requester data inserted at the startup for demo purpose.
+#### N.B: Better to run the docker setup in linux environment ( Mac has some issues running Indexer service inside couchbase server)
+```sh
+cd local-couchbase-setup
+docker-compose build
+docker compose up -d
+```
 
+## Document structure
+### User
+```json
+{
+  "type": "user",
+  "userId": "8beb7b9d-6403-4e4b-ad16-1a25bb294d45",
+  "name": "Uriah Walters",
+  "userType": "responder",    // or "requester"
+  "responderType": "Ambulance",  // (only for responders) e.g. "Ambulance", "Doctor", "Fire Truck", "Rescue Team", etc.
+  "location": {
+    "lat": 59.30239,
+    "lon": 18.12934
+  },
+  "status": "available",       // "available", "occupied", "unavailable"
+  "lastUpdated": "2025-06-25T09:15:43.362654+00:00"
+}
+```
+### User Credential
+```json
+{
+  "type": "user_credentials",
+  "userId": "1b7a1935-9712-4142-90a2-016944824dee",
+  "username": "matilda",
+  "password": "$2b$12$ZBrFUO4ckEdllP69ftQO2.9zOptZAlaxoDW6flG2siUKUWuFdYFle"  // bcrypt-hashed
+}
+
+```
+
+### Emergency Request
+```json
+{
+    "type":"emergency_request",
+    "request_by": "36894809-5d24-4f1e-b851-7fa36ec234a8", /// Request's userId
+    "requested_at":  "2025-06-25T09:15:43.362654+00:00",
+    "status": "responded", // open, responded, completed
+    "responded_by": "8beb7b9d-6403-4e4b-ad16-1a25bb294d45",
+    "responded_at": "2025-06-25T09:15:43.362654+00:00",
+    "notes_by_responder": ""
+}
+```
 ---
 
 **License:** MIT  

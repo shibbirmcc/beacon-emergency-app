@@ -1,0 +1,1362 @@
+[
+  {
+    "type": "user",
+    "userId": "5825778b-5de5-454e-aea8-0863bcd2e77a",
+    "name": "Alice Johnson",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.355421,
+      "lon": 18.051721
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362028+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "9d569470-ff50-44fa-bb49-42afa928e0ac",
+    "name": "Bob Smith",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.343006,
+      "lon": 18.140143
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362057+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "ed8c1635-5c7c-49be-9e0b-694c0a03f9fc",
+    "name": "Charlie Brown",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.341934,
+      "lon": 18.126034
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362066+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "bdd55b36-4168-4337-a3ad-cf8c25f3400c",
+    "name": "David Miller",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.353897,
+      "lon": 18.112256
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362073+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "4fd55ae9-7e10-42f7-a83f-64e85281cc60",
+    "name": "Emma Wilson",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.366546,
+      "lon": 18.036327
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362086+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "eea8216b-55d0-485b-ac2f-93b52d9d72d2",
+    "name": "Frank Harris",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.351704,
+      "lon": 18.14177
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362092+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "6f5dadf6-2207-4274-9785-d86c40aa5268",
+    "name": "Grace Evans",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.331147,
+      "lon": 18.133164
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362097+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "bf5dd47f-4250-4042-94cd-b9821cdedc49",
+    "name": "Hannah Moore",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": {
+      "lat": 59.337058,
+      "lon": 18.086879
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362103+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "c2d191cb-6644-476e-92df-a216b1265d1a",
+    "name": "Ivan Scott",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": {
+      "lat": 59.349176,
+      "lon": 18.117168
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362116+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "527cc902-9d8f-445f-b04c-1a76190dcb43",
+    "name": "Julia Adams",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.353372,
+      "lon": 18.05524
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362122+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "d77f42df-00fd-448b-bab4-671cbe819ac1",
+    "name": "Kevin Turner",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.325535,
+      "lon": 18.042718
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362128+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "3dfc68ad-5128-438d-bc0d-216802e5e928",
+    "name": "Laura Parker",
+    "userType": "responder",
+    "responderType": "Fire Truck",
+    "location": {
+      "lat": 59.32068,
+      "lon": 18.029221
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362134+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "3e8a40ff-f3f3-4926-8886-783a75d539b5",
+    "name": "Mike Hill",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.332782,
+      "lon": 18.094655
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362139+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "755b91d4-d6e0-4b3d-96eb-c4d5c198f432",
+    "name": "Nina Collins",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.310863,
+      "lon": 18.101274
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362144+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "2c06d3a4-2eae-4874-b6d8-a32edc7aacc2",
+    "name": "Oscar Ward",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.332173,
+      "lon": 18.039267
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362150+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "47edf033-d08a-41a2-bc38-d2d803a7a56b",
+    "name": "Paula Cooper",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.318317,
+      "lon": 18.147084
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362155+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "222ecf09-26a6-4ed4-8f9f-97be8a0d4877",
+    "name": "Quentin Rogers",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.367481,
+      "lon": 18.07155
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362162+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "86bb1fa6-9fa9-4439-8d59-67c1261e800c",
+    "name": "Rachel Cook",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.301739,
+      "lon": 18.023748
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362168+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "0044159c-3628-4353-8c61-9e58386e2e65",
+    "name": "Steve Bailey",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.3469,
+      "lon": 18.029434
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362174+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "7cbd859b-7ce2-42ca-b2e1-e4ee5093c1f5",
+    "name": "Tina Richardson",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": {
+      "lat": 59.324723,
+      "lon": 18.045231
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362179+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "358cbf27-4120-4da0-801e-8bd69fb9ef5b",
+    "name": "Ulf Simmons",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.321011,
+      "lon": 18.069744
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362188+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "3f1f85a5-c364-4fbd-93ea-c9a63398c862",
+    "name": "Vera Kelly",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": {
+      "lat": 59.334651,
+      "lon": 18.054473
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362193+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "b4cfe3c6-5821-4f80-862f-757c933eafa8",
+    "name": "Walter Price",
+    "userType": "responder",
+    "responderType": "Fire Truck",
+    "location": {
+      "lat": 59.367839,
+      "lon": 18.061683
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362198+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "d6e8f8be-d785-4729-a54a-5fb4fbc35a17",
+    "name": "Xenia Howard",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.363974,
+      "lon": 18.122163
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362203+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "b1492929-f1ed-4a79-baf9-dff60403867c",
+    "name": "Yusuf Patterson",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": {
+      "lat": 59.301318,
+      "lon": 18.116989
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362208+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "280af95d-670a-4ebb-ba36-b2a9aeb22331",
+    "name": "Zara Hughes",
+    "userType": "responder",
+    "responderType": "Fire Truck",
+    "location": {
+      "lat": 59.329561,
+      "lon": 18.027452
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362215+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "e8e4736c-d479-4235-9694-053b59370ae7",
+    "name": "Aaron Foster",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.32469,
+      "lon": 18.143825
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362221+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "539d767b-1567-49a9-a948-04f20702b522",
+    "name": "Bella Morgan",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.329468,
+      "lon": 18.090113
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362226+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "08807d8c-a356-464d-90ce-59d3b9efa11f",
+    "name": "Caleb Ross",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.328835,
+      "lon": 18.09657
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362231+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "89030c61-4650-4fde-a0f8-bdc98e64bbcf",
+    "name": "Diana Murphy",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.32551,
+      "lon": 18.132143
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362236+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "e4f3d8db-7677-4e3a-8f40-3cff9696a691",
+    "name": "Ethan Hughes",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.338035,
+      "lon": 18.075484
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362241+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "4a9cb303-8c6c-4537-80e2-376f02850a97",
+    "name": "Fiona Edwards",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.367178,
+      "lon": 18.113818
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362246+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "f73a6640-4365-46bb-aabb-6389199d7432",
+    "name": "Gavin Peterson",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.361382,
+      "lon": 18.073759
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362251+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "9d822893-85df-40e7-89cc-71499e3cd52c",
+    "name": "Hailey Powell",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.332923,
+      "lon": 18.036221
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362257+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "42f93f3f-5c02-42a4-98fc-55da90fa8763",
+    "name": "Isaac Jenkins",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.323441,
+      "lon": 18.128012
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362268+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "36f851d1-a6b2-4449-b833-85e9ab095ffc",
+    "name": "Jasmine Bryant",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": {
+      "lat": 59.3014,
+      "lon": 18.141342
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362273+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "8ede3a07-6936-457b-8910-ea0123318c3d",
+    "name": "Kyle Hayes",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.353263,
+      "lon": 18.147717
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362280+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "2b962728-9438-4dff-91e8-b04feac5de08",
+    "name": "Lily Barnes",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.327031,
+      "lon": 18.125819
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362285+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "8337713a-1255-49cc-bdb6-e8bea55ec770",
+    "name": "Mason Coleman",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.332253,
+      "lon": 18.0541
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362291+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "d1394272-d080-4c2a-b8ab-e6baf64d9a0b",
+    "name": "Natalie Griffin",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.363053,
+      "lon": 18.071344
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362299+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "8a69d601-803e-45ed-9df0-8019912b84c2",
+    "name": "Oliver Sullivan",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.359225,
+      "lon": 18.059537
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362304+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "c37c3cdf-39ab-429a-97da-f6e422cfebf7",
+    "name": "Penelope Long",
+    "userType": "responder",
+    "responderType": "Fire Truck",
+    "location": {
+      "lat": 59.335466,
+      "lon": 18.121692
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362314+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "cec6ccbf-0a46-4790-88b9-def388c7f62b",
+    "name": "Quincy Bennett",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": {
+      "lat": 59.312763,
+      "lon": 18.036497
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362323+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "af1baf70-b680-4e28-9190-f1ba19147f6a",
+    "name": "Rebecca Russell",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.347292,
+      "lon": 18.088642
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362329+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "29824643-eb13-432f-a351-c899d07aa4db",
+    "name": "Samuel Hamilton",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.307127,
+      "lon": 18.06605
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362334+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "2cbc4496-cb32-490c-89be-711bb839d8a5",
+    "name": "Tara Graham",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.357103,
+      "lon": 18.08586
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362340+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "55fd789d-543d-44fa-95b6-06864830c53c",
+    "name": "Umar Ellis",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.344725,
+      "lon": 18.112558
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362345+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "150a55e1-2566-4388-8ccd-372a10eafba7",
+    "name": "Valerie Alexander",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": {
+      "lat": 59.310669,
+      "lon": 18.037141
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362350+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "2acfa85b-c73e-4346-aec7-9a825b2a59af",
+    "name": "William Gardner",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": {
+      "lat": 59.367417,
+      "lon": 18.051923
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362355+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "df9561bd-720c-47a5-903b-437173b968cf",
+    "name": "Xander Stone",
+    "userType": "responder",
+    "responderType": "Fire Truck",
+    "location": {
+      "lat": 59.333079,
+      "lon": 18.103534
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362361+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "a7c308bf-5c70-44c4-a25e-a3b9da082847",
+    "name": "Yara Stephens",
+    "userType": "responder",
+    "responderType": "Fire Truck",
+    "location": {
+      "lat": 59.36325,
+      "lon": 18.043525
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362366+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "3794ebde-84cd-4248-98f0-55c8e2f31d9e",
+    "name": "Zane Carr",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.345905,
+      "lon": 18.142578
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362372+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "7f86a7d7-cf08-40c6-8f9d-c3b18ddfce74",
+    "name": "Adrian Chapman",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.342005,
+      "lon": 18.022468
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362379+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "565cd0e9-76d4-4a66-a584-365e89bfdaca",
+    "name": "Bethany Lane",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.306226,
+      "lon": 18.021779
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362387+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "f752a61f-417c-47b2-a309-bade974c6bb8",
+    "name": "Cameron Shaw",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.350886,
+      "lon": 18.099456
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362393+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "07946136-204e-4a76-939d-4fdde7e9e6fc",
+    "name": "Derek Dean",
+    "userType": "responder",
+    "responderType": "Fire Truck",
+    "location": {
+      "lat": 59.329353,
+      "lon": 18.027986
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362398+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "d7a40d05-e859-4551-8e1f-41c5d0153fbe",
+    "name": "Elena Spencer",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.305258,
+      "lon": 18.071978
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362405+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "fdfe0ace-fbc5-4958-81c5-5b27d69411b3",
+    "name": "Felix Warren",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.30132,
+      "lon": 18.111146
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362411+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "306d5c6a-85f7-4c69-bad0-4bd1dc7ed880",
+    "name": "Georgia Lawson",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.314941,
+      "lon": 18.123215
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362416+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "00678c38-a8c2-4fd8-a2f9-2da154eca480",
+    "name": "Harvey Hart",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.337422,
+      "lon": 18.148353
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362424+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "84aa654c-9737-439d-8d8c-edb73934349b",
+    "name": "Isla Fox",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.3484,
+      "lon": 18.123567
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362429+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "aa652afb-854d-434b-abd3-3b8e4d12bedb",
+    "name": "Jonah Riley",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.360621,
+      "lon": 18.055971
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362434+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "8450f5f2-0f32-4de3-a3bc-83ee2426a0c6",
+    "name": "Kara Hunt",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.357557,
+      "lon": 18.078514
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362439+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "e0d05e55-4991-48a4-be92-9bbcfd36a091",
+    "name": "Leonard Brewer",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.356394,
+      "lon": 18.02471
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362445+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "6acd5b49-d040-405b-b354-a597ae329c94",
+    "name": "Molly Holland",
+    "userType": "responder",
+    "responderType": "Fire Truck",
+    "location": {
+      "lat": 59.314349,
+      "lon": 18.138344
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362450+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "52b9a9c5-33e9-4a49-82f2-f0c34a4006bc",
+    "name": "Nathan Dean",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.355443,
+      "lon": 18.055519
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362456+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "62a6a997-de46-459c-bef2-97fe2c84d2aa",
+    "name": "Olivia Watts",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.368672,
+      "lon": 18.071984
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362461+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "81bd622c-b7c8-4e48-b472-c904fa8db456",
+    "name": "Patrick Ford",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.324382,
+      "lon": 18.026681
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362468+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "885ee55c-2040-4012-b6bb-a369e8b90077",
+    "name": "Queenie Bates",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.362754,
+      "lon": 18.064055
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362478+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "ee8804c9-d64d-403b-b421-a1419e80a74a",
+    "name": "Ronan Fuller",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": {
+      "lat": 59.301952,
+      "lon": 18.025433
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362483+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "18cc21fc-1e32-42fa-8f69-1fbcdf44e34d",
+    "name": "Sophie Matthews",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.315364,
+      "lon": 18.057427
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362489+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "f691d46d-a779-41e8-a328-79a9de064f6d",
+    "name": "Thomas Newman",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.323104,
+      "lon": 18.087392
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362494+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "9aa12429-a711-42e0-b38d-f79528a7667f",
+    "name": "Una Blake",
+    "userType": "responder",
+    "responderType": "Fire Truck",
+    "location": {
+      "lat": 59.354425,
+      "lon": 18.037672
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362502+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "55e6f6b0-5bf7-4c77-a579-2fe574bec705",
+    "name": "Victor Lynch",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.356528,
+      "lon": 18.043461
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362507+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "c962a749-7176-4528-8171-44c9b69ef3ea",
+    "name": "Wendy Reynolds",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.355596,
+      "lon": 18.11977
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362512+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "b1733b21-43eb-4ff0-807d-43be11263bcc",
+    "name": "Ximena Berry",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.360431,
+      "lon": 18.114057
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362518+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "80174b6c-83d1-4d27-8742-75135c8e89cd",
+    "name": "Yannis Boyd",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.346409,
+      "lon": 18.126038
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362523+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "bbf6df21-1081-4098-9e23-433e7df15dfa",
+    "name": "Zoey Perry",
+    "userType": "responder",
+    "responderType": "Fire Truck",
+    "location": {
+      "lat": 59.327644,
+      "lon": 18.027411
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362529+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "c4e32c89-a3e7-4304-9310-c80d78f95ac8",
+    "name": "Abel Walton",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": {
+      "lat": 59.362126,
+      "lon": 18.128636
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362536+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "7d500afa-170d-43e3-b12a-2f8c8c42ee5d",
+    "name": "Bonnie Bishop",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.311748,
+      "lon": 18.033905
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362542+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "5aea33c7-78f8-446d-ba92-320bab8c9d81",
+    "name": "Clark Holt",
+    "userType": "responder",
+    "responderType": "Fire Truck",
+    "location": {
+      "lat": 59.315387,
+      "lon": 18.131304
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362547+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "52aff099-2484-4ee1-9022-7421f99b00e0",
+    "name": "Daisy Miles",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.366521,
+      "lon": 18.082315
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362552+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "9fb64236-24a0-40fc-9163-88c5d39d3043",
+    "name": "Elliot Cruz",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.360223,
+      "lon": 18.13748
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362557+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "1da72f55-72ac-45bd-adc9-1e90851eb0cd",
+    "name": "Faith Hoffman",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.322851,
+      "lon": 18.057639
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362562+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "0119a4d9-b97b-4b1a-82e6-cff6911d9488",
+    "name": "Graham Perkins",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.346304,
+      "lon": 18.126064
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362570+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "da82f1fd-f771-4c6d-9cda-e6c1f4d06e0c",
+    "name": "Heidi Fleming",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.329206,
+      "lon": 18.145894
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362575+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "e5ad31a2-037a-4e0d-a509-2d83243829a8",
+    "name": "Ian Davidson",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.36298,
+      "lon": 18.047795
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362580+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "0d957756-c87b-4635-801e-6266a046e142",
+    "name": "Joyce Greene",
+    "userType": "responder",
+    "responderType": "Fire Truck",
+    "location": {
+      "lat": 59.30669,
+      "lon": 18.033553
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362586+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "49fd541e-074f-460f-9961-2d57e9d7d950",
+    "name": "Kurt Hudson",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.320325,
+      "lon": 18.064805
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362592+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "9c96daef-9e01-4a92-a7de-9aae498abf8a",
+    "name": "Luna Barrett",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.304134,
+      "lon": 18.020432
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362599+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "d00e7401-ed9f-4282-b01f-07e5d0d647e4",
+    "name": "Miles Fleming",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.309969,
+      "lon": 18.066933
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362604+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "8f0f0fb5-0f67-4e44-ba97-edee3c79785d",
+    "name": "Nora Barrett",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.338083,
+      "lon": 18.034437
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362609+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "95932a3a-b137-48d6-8e4b-2f2b4eb44d8e",
+    "name": "Owen Steele",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": {
+      "lat": 59.325776,
+      "lon": 18.0791
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362614+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "1c3dfc92-d1ae-4e48-aef7-eb544b826365",
+    "name": "Phoebe Lane",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.361675,
+      "lon": 18.073967
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362623+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "36f38a5b-494d-4a47-875c-7c724042c86e",
+    "name": "Quinn Barrett",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.328732,
+      "lon": 18.037631
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362630+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "cca9199c-1dc9-43a2-a53f-324274485fd2",
+    "name": "Riley Benson",
+    "userType": "responder",
+    "responderType": "Generator",
+    "location": {
+      "lat": 59.326084,
+      "lon": 18.108728
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362636+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "aa1a7c5a-f21e-43bd-8236-008db889d8fa",
+    "name": "Sadie Ray",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.344769,
+      "lon": 18.052477
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362641+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "e5ef88e0-3dc0-4ccd-b845-5cd651be6fb0",
+    "name": "Tristan Elliott",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": {
+      "lat": 59.304109,
+      "lon": 18.020003
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362647+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "8beb7b9d-6403-4e4b-ad16-1a25bb294d45",
+    "name": "Uriah Walters",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": {
+      "lat": 59.30239,
+      "lon": 18.12934
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362654+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "227a6454-c162-433c-b4b3-96329bd03a9b",
+    "name": "Vanessa Barker",
+    "userType": "responder",
+    "responderType": "Water Supply",
+    "location": {
+      "lat": 59.328597,
+      "lon": 18.043497
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362659+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "bade34ad-dd98-4fe8-af25-0d66fe17ecc7",
+    "name": "Elijah Norris",
+    "userType": "requester",
+    "location": {
+      "lat": 59.302239,
+      "lon": 18.10607
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362668+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "1b7a1935-9712-4142-90a2-016944824dee",
+    "name": "Matilda Rose",
+    "userType": "requester",
+    "location": {
+      "lat": 59.352265,
+      "lon": 18.099662
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362675+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "ee0811f9-2204-44a0-9ae0-014d4eba459b",
+    "name": "Silas Vaughn",
+    "userType": "requester",
+    "location": {
+      "lat": 59.314692,
+      "lon": 18.118448
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362681+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "36894809-5d24-4f1e-b851-7fa36ec234a8",
+    "name": "Clara Jennings",
+    "userType": "requester",
+    "location": {
+      "lat": 59.325356,
+      "lon": 18.119566
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362686+00:00"
+  },
+  {
+    "type": "user",
+    "userId": "d853c8f4-04da-4ae4-937b-4f7e87b408d8",
+    "name": "Dominic Tate",
+    "userType": "requester",
+    "location": {
+      "lat": 59.334145,
+      "lon": 18.029658
+    },
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43.362690+00:00"
+  }
+]

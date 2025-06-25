@@ -1,0 +1,49 @@
+{
+	"interface":":4984",
+	"adminInterface":":4985",
+	"log": ["*"],
+	"logging": {
+	  "log_file_path": "/var/tmp/sglogs",
+	  "console": {
+		"log_level": "debug",
+		"log_keys": ["*"]
+	  },
+	  "error": {
+		"enabled": true,
+		"rotation": {
+		  "max_size": 20,
+		  "max_age": 180
+		}
+	  },
+	  "warn": {
+		"enabled": true,
+		"rotation": {
+		  "max_size": 20,
+		  "max_age": 90
+		}
+	  },
+	  "info": {
+		"enabled": false
+	  },
+	  "debug": {
+		"enabled": false
+	  }
+	},
+	"disable_persistent_config":true,
+	"server_tls_skip_verify": true,
+	"use_tls_server": false,
+	"databases": {
+	  "beacon": {
+		"import_docs": true,
+		"bucket":"beacon",
+		"server": "couchbase://couchbase-server",
+		"enable_shared_bucket_access":true,
+		"delta_sync": {
+		  "enabled":false
+		},
+		"num_index_replicas":0,
+		"username": "admin",
+		"password": "admin00"
+	  }
+	}
+  }
