@@ -17,6 +17,8 @@ services:
       - COUCHBASE_RBAC_USERNAME=admin
       - COUCHBASE_RBAC_PASSWORD=admin00
       - COUCHBASE_RBAC_NAME=admin
+      - COUCHBASE_RBAC_BACKEND_USERNAME=beacon
+      - COUCHBASE_RBAC_BACKEND_PASSWORD=beacon
       - COUCHBASE_RAM_SIZE=5120
       - COUCHBASE_EVENTING_RAM_SIZE=512
       - COUCHBASE_INDEX_RAM_SIZE=1024
@@ -29,6 +31,36 @@ services:
       - workshop
     entrypoint: [""]
     command: sh -c "/opt/couchbase/init/init-cbserver.sh"
+
+
+  backend:
+    build: ./backend
+    image: beacon-backend:latest
+    container_name: beacon-backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - couchbase-server
+    environment:
+      - COUCHBASE_HOST=couchbase-server
+      - COUCHBASE_USERNAME=beacon
+      - COUCHBASE_PASSWORD=beacon
+    networks:
+      - workshop
+
+  # tester:
+  #   image: python:3.11-slim
+  #   container_name: couchbase-tester
+  #   command: ["sleep", "3600"]
+  #   depends_on:
+  #     - couchbase-server
+  #   environment:
+  #     - COUCHBASE_HOST=couchbase-server
+  #     - COUCHBASE_USERNAME=beacon
+  #     - COUCHBASE_PASSWORD=beacon
+  #   networks:
+  #     - workshop
+
 
   sync-gateway:
     build: ./sync-gateway
@@ -45,7 +77,8 @@ services:
     networks:
       - workshop
     entrypoint: [""]
-    command: sh -c "/opt/couchbase-sync-gateway/init/init-syncgateway.sh"
+    command: ["/opt/couchbase-sync-gateway/init/init-syncgateway.sh"]
+
 
 networks:
   workshop:

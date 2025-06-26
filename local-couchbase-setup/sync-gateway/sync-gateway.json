@@ -29,21 +29,36 @@
 		"enabled": false
 	  }
 	},
-	"disable_persistent_config":true,
+	"disable_persistent_config":false,
 	"server_tls_skip_verify": true,
 	"use_tls_server": false,
 	"databases": {
 	  "beacon": {
-		"import_docs": true,
 		"bucket":"beacon",
 		"server": "couchbase://couchbase-server",
+		"import_docs": "continuous",
 		"enable_shared_bucket_access":true,
+		"use_views": false,
 		"delta_sync": {
 		  "enabled":false
 		},
 		"num_index_replicas":0,
 		"username": "admin",
-		"password": "admin00"
+		"password": "admin00",
+		"users":{
+			"GUEST":{"disabled":false, "admin_channels":["*"]},
+			"user":{"password":"user00", "admin_channels":["*"]}
+		},
+		"sync": `function(doc, oldDoc, meta) {
+			if (doc.type === "user" && doc.userType === "responder") {
+				channel("responder");
+				requireUser(doc.userId);
+			}
+			if (doc.type === "emergency_request") {
+				requireUser(doc.request_by);
+				channel("emergency_" + doc.request_by);
+			}
+		}`
 	  }
 	}
   }
