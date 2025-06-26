@@ -1,4 +1,4 @@
-FROM couchbase:enterprise-7.6.2 AS stage_base
+FROM couchbase:enterprise-7.6.6 AS stage_base
 COPY init-cbserver.sh /opt/couchbase/init/
 COPY users.json /opt/couchbase/init/
 COPY user_credentials.json /opt/couchbase/init/

@@ -49,6 +49,20 @@ if ! [ -f "$FILE" ]; then
     --roles mobile_sync_gateway[*] \
     --auth-domain local
 
+  echo "⚙️  Creating Backend user..."
+  /opt/couchbase/bin/couchbase-cli user-manage \
+    --cluster http://127.0.0.1 \
+    --username $COUCHBASE_ADMINISTRATOR_USERNAME \
+    --password $COUCHBASE_ADMINISTRATOR_PASSWORD \
+    --set \
+    --rbac-username $COUCHBASE_RBAC_BACKEND_USERNAME \
+    --rbac-password $COUCHBASE_RBAC_BACKEND_PASSWORD \
+    --roles query_select[beacon],data_reader[beacon],data_writer[beacon] \
+    --auth-domain local
+
+
+
+
   echo "⚙️  Importing sample users and credentials..."
   /opt/couchbase/bin/cbimport json --format list \
     -c http://localhost:8091 \
@@ -80,6 +94,7 @@ if ! [ -f "$FILE" ]; then
   echo "✅ All indexes online — ready to create new indexes."
 
   echo "⚙️  Creating indexes..."
+
   /opt/couchbase/bin/cbq -u $COUCHBASE_ADMINISTRATOR_USERNAME -p $COUCHBASE_ADMINISTRATOR_PASSWORD -s \
   "CREATE INDEX idx_beacon_location ON \`$COUCHBASE_BUCKET\`(location) WHERE type = 'user';"
 
@@ -94,6 +109,16 @@ if ! [ -f "$FILE" ]; then
 
   /opt/couchbase/bin/cbq -u $COUCHBASE_ADMINISTRATOR_USERNAME -p $COUCHBASE_ADMINISTRATOR_PASSWORD -s \
   "CREATE INDEX idx_beacon_username ON \`$COUCHBASE_BUCKET\`(username) WHERE type = 'user_credentials';"
+
+  echo "Creating primary and geo composite indexes..."
+  /opt/couchbase/bin/cbq -u "$COUCHBASE_ADMINISTRATOR_USERNAME" -p "$COUCHBASE_ADMINISTRATOR_PASSWORD" << EOF
+  CREATE PRIMARY INDEX IF NOT EXISTS ON \`$COUCHBASE_BUCKET\`;
+  CREATE INDEX IF NOT EXISTS idx_beacon_lat_lon
+    ON \`$COUCHBASE_BUCKET\`(\`location\`.\`lat\`, \`location\`.\`lon\`)
+    WHERE type = "user" AND userType = "responder";
+EOF
+
+
 
   echo "✅ All setup complete."
 
