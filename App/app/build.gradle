@@ -38,7 +38,7 @@ dependencies {
     implementation libs.material
     implementation libs.maps
     implementation libs.locations
-    implementation libs.couchbase.lite
+    implementation libs.couchbase.lite.ee
     implementation libs.constraintlayout
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
