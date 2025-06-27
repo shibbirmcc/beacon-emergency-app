@@ -56,6 +56,14 @@ docker-compose build
 docker compose up -d
 ```
 
+## Setup Bidirectional Replication using XDCR configuration
+Once couchbase-server and couchbase-server-1 is started and all the internal configurations are Complete, the run this 
+```sh
+cd local-couchbase-setup/xdcr
+docker build -t xdcr-setup:latest .
+./run
+```
+
 ## Document structure
 ### User
 ```json

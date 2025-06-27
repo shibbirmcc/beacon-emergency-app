@@ -10,6 +10,7 @@ services:
     mem_limit: 8g
     environment:  
       - CLUSTER_NAME=couchbase-cluster-1
+      - CLUSTER_ID=1
       - COUCHBASE_ADMINISTRATOR_USERNAME=Administrator
       - COUCHBASE_ADMINISTRATOR_PASSWORD=admin00
       - COUCHBASE_BUCKET=beacon
@@ -31,6 +32,64 @@ services:
       - workshop
     entrypoint: [""]
     command: sh -c "/opt/couchbase/init/init-cbserver.sh"
+
+
+
+  couchbase-server-2:
+    image: beacon-couchbase-server:latest
+    ports:
+     - 58091-58096:8091-8096
+     - 51210:11210
+    depends_on:
+      - couchbase-server
+    mem_limit: 8g
+    environment:  
+      - CLUSTER_NAME=couchbase-cluster-2
+      - CLUSTER_ID=2 
+      - COUCHBASE_ADMINISTRATOR_USERNAME=Administrator
+      - COUCHBASE_ADMINISTRATOR_PASSWORD=admin00
+      - COUCHBASE_BUCKET=beacon
+      - COUCHBASE_BUCKET_RAMSIZE=1024
+      - COUCHBASE_RBAC_USERNAME=admin
+      - COUCHBASE_RBAC_PASSWORD=admin00
+      - COUCHBASE_RBAC_NAME=admin
+      - COUCHBASE_RBAC_BACKEND_USERNAME=beacon
+      - COUCHBASE_RBAC_BACKEND_PASSWORD=beacon
+      - COUCHBASE_RAM_SIZE=5120
+      - COUCHBASE_EVENTING_RAM_SIZE=512
+      - COUCHBASE_INDEX_RAM_SIZE=1024
+      - PEER_CLUSTER_URL=http://couchbase-server:8091
+    hostname: couchbase-server-2
+    container_name: couchbase-server-2
+    working_dir: /opt/couchbase
+    stdin_open: true
+    tty: true      
+    networks:
+      - workshop
+    entrypoint: [""]
+    command: sh -c "/opt/couchbase/init/init-cbserver.sh"
+
+
+
+  # xdcr-setup:
+  #   build: ./xdcr
+  #   container_name: xdcr-setup
+  #   depends_on:
+  #     - couchbase-server
+  #     - couchbase-server-2
+  #   environment:
+  #     - CLUSTER1_URL=http://couchbase-server:8091
+  #     - CLUSTER2_URL=http://couchbase-server-2:8091
+  #     - COUCHBASE_ADMINISTRATOR_USERNAME=Administrator
+  #     - COUCHBASE_ADMINISTRATOR_PASSWORD=admin00
+  #     - COUCHBASE_BUCKET=beacon
+  #   networks:
+  #     - workshop
+  #   volumes:
+  #     - ./xdcr/setup-xdcr.sh:/usr/local/bin/setup-xdcr.sh
+  #   # entrypoint: ["/usr/local/bin/setup-xdcr.sh"]
+  #   entrypoint: ["/bin/bash"]
+
 
 
   backend:

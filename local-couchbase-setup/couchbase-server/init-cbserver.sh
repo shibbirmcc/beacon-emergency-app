@@ -63,25 +63,6 @@ if ! [ -f "$FILE" ]; then
 
 
 
-  echo "⚙️  Importing sample users and credentials..."
-  /opt/couchbase/bin/cbimport json --format list \
-    -c http://localhost:8091 \
-    -u $COUCHBASE_ADMINISTRATOR_USERNAME \
-    -p $COUCHBASE_ADMINISTRATOR_PASSWORD \
-    -d "file:///opt/couchbase/init/users.json" -b $COUCHBASE_BUCKET -g "user::%userId%"
-
-
-  /opt/couchbase/bin/cbimport json --format list \
-    -c http://localhost:8091 \
-    -u $COUCHBASE_ADMINISTRATOR_USERNAME \
-    -p $COUCHBASE_ADMINISTRATOR_PASSWORD \
-    -d "file:///opt/couchbase/init/user_credentials.json" -b $COUCHBASE_BUCKET -g "user_credentials::%userId%"
-
-  echo "✅ Sample users and credentials import successfulI";
-
-
-
-
   echo "⏳ Waiting for existing indexes to be online..."
   until /opt/couchbase/bin/cbq \
     -u $COUCHBASE_ADMINISTRATOR_USERNAME \
@@ -117,6 +98,26 @@ if ! [ -f "$FILE" ]; then
     ON \`$COUCHBASE_BUCKET\`(\`location\`.\`lat\`, \`location\`.\`lon\`)
     WHERE type = "user" AND userType = "responder";
 EOF
+
+
+
+  if [[ "$CLUSTER_ID" == "1" ]]; then
+      echo "⚙️  Importing sample users and credentials..."
+      /opt/couchbase/bin/cbimport json --format list \
+        -c http://localhost:8091 \
+        -u $COUCHBASE_ADMINISTRATOR_USERNAME \
+        -p $COUCHBASE_ADMINISTRATOR_PASSWORD \
+        -d "file:///opt/couchbase/init/users.json" -b $COUCHBASE_BUCKET -g "user::%userId%"
+
+
+      /opt/couchbase/bin/cbimport json --format list \
+        -c http://localhost:8091 \
+        -u $COUCHBASE_ADMINISTRATOR_USERNAME \
+        -p $COUCHBASE_ADMINISTRATOR_PASSWORD \
+        -d "file:///opt/couchbase/init/user_credentials.json" -b $COUCHBASE_BUCKET -g "user_credentials::%userId%"
+
+      echo "✅ Sample users and credentials import successfull";
+  fi
 
 
 
