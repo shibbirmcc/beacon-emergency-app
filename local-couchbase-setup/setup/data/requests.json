@@ -1,0 +1,202 @@
+[
+  {
+    "type": "emergency_request",
+    "requested_by": "1",
+    "requested_at": "2025-06-25T09:15:43Z",
+    "status": "responded",
+    "responded_by": "7",
+    "responded_at": "2025-06-25T09:25:43Z",
+    "notes_by_responder": "Patient stabilized on site.",
+    "city": "Stockholm"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "2",
+    "requested_at": "2025-06-25T09:20:00Z",
+    "status": "open",
+    "responded_by": "",
+    "responded_at": "",
+    "notes_by_responder": "",
+    "city": "Stockholm"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "3",
+    "requested_at": "2025-06-25T09:30:00Z",
+    "status": "completed",
+    "responded_by": "4",
+    "responded_at": "2025-06-25T09:40:00Z",
+    "notes_by_responder": "Fire extinguished successfully.",
+    "city": "Stockholm"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "4",
+    "requested_at": "2025-06-25T10:00:00Z",
+    "status": "responded",
+    "responded_by": "9",
+    "responded_at": "2025-06-25T10:10:00Z",
+    "notes_by_responder": "Minor injuries treated.",
+    "city": "Gothenburg"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "5",
+    "requested_at": "2025-06-25T10:15:00Z",
+    "status": "open",
+    "responded_by": "",
+    "responded_at": "",
+    "notes_by_responder": "",
+    "city": "Gothenburg"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "6",
+    "requested_at": "2025-06-25T10:30:00Z",
+    "status": "completed",
+    "responded_by": "13",
+    "responded_at": "2025-06-25T10:40:00Z",
+    "notes_by_responder": "Patient transported to hospital.",
+    "city": "Gothenburg"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "7",
+    "requested_at": "2025-06-25T11:00:00Z",
+    "status": "responded",
+    "responded_by": "17",
+    "responded_at": "2025-06-25T11:15:00Z",
+    "notes_by_responder": "Rescue team dispatched.",
+    "city": "Stockholm"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "8",
+    "requested_at": "2025-06-25T11:20:00Z",
+    "status": "open",
+    "responded_by": "",
+    "responded_at": "",
+    "notes_by_responder": "",
+    "city": "Stockholm"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "9",
+    "requested_at": "2025-06-25T11:30:00Z",
+    "status": "completed",
+    "responded_by": "5",
+    "responded_at": "2025-06-25T11:40:00Z",
+    "notes_by_responder": "Evacuation completed.",
+    "city": "Gothenburg"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "10",
+    "requested_at": "2025-06-25T12:00:00Z",
+    "status": "responded",
+    "responded_by": "11",
+    "responded_at": "2025-06-25T12:10:00Z",
+    "notes_by_responder": "On-site medical support provided.",
+    "city": "Gothenburg"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "11",
+    "requested_at": "2025-06-25T12:15:00Z",
+    "status": "completed",
+    "responded_by": "2",
+    "responded_at": "2025-06-25T12:25:00Z",
+    "notes_by_responder": "Situation resolved.",
+    "city": "Stockholm"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "12",
+    "requested_at": "2025-06-25T12:30:00Z",
+    "status": "responded",
+    "responded_by": "15",
+    "responded_at": "2025-06-25T12:40:00Z",
+    "notes_by_responder": "Incident under control.",
+    "city": "Stockholm"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "13",
+    "requested_at": "2025-06-25T13:00:00Z",
+    "status": "open",
+    "responded_by": "",
+    "responded_at": "",
+    "notes_by_responder": "",
+    "city": "Gothenburg"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "14",
+    "requested_at": "2025-06-25T13:15:00Z",
+    "status": "completed",
+    "responded_by": "1",
+    "responded_at": "2025-06-25T13:25:00Z",
+    "notes_by_responder": "Patient transported safely.",
+    "city": "Gothenburg"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "15",
+    "requested_at": "2025-06-25T13:30:00Z",
+    "status": "responded",
+    "responded_by": "8",
+    "responded_at": "2025-06-25T13:40:00Z",
+    "notes_by_responder": "Minor incident, no injuries.",
+    "city": "Stockholm"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "16",
+    "requested_at": "2025-06-25T14:00:00Z",
+    "status": "completed",
+    "responded_by": "20",
+    "responded_at": "2025-06-25T14:10:00Z",
+    "notes_by_responder": "Successful intervention.",
+    "city": "Stockholm"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "17",
+    "requested_at": "2025-06-25T14:20:00Z",
+    "status": "responded",
+    "responded_by": "14",
+    "responded_at": "2025-06-25T14:30:00Z",
+    "notes_by_responder": "Immediate attention provided.",
+    "city": "Gothenburg"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "18",
+    "requested_at": "2025-06-25T14:40:00Z",
+    "status": "open",
+    "responded_by": "",
+    "responded_at": "",
+    "notes_by_responder": "",
+    "city": "Gothenburg"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "19",
+    "requested_at": "2025-06-25T15:00:00Z",
+    "status": "completed",
+    "responded_by": "6",
+    "responded_at": "2025-06-25T15:10:00Z",
+    "notes_by_responder": "Patient fully stabilized.",
+    "city": "Stockholm"
+  },
+  {
+    "type": "emergency_request",
+    "requested_by": "20",
+    "requested_at": "2025-06-25T15:20:00Z",
+    "status": "responded",
+    "responded_by": "3",
+    "responded_at": "2025-06-25T15:30:00Z",
+    "notes_by_responder": "Incident reported to authorities.",
+    "city": "Stockholm"
+  }
+]
