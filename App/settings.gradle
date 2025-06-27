@@ -16,6 +16,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // THIS IS THE CORRECT AND NECESSARY LINE FOR COUCHBASE LITE 3.x
+        maven {
+            url 'https://mobile.maven.couchbase.com/maven2/dev/'
+        }
     }
 }
 

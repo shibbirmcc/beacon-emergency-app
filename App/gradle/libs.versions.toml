@@ -7,7 +7,7 @@ appcompat = "1.6.1"
 material = "1.10.0"
 maps = "18.1.0"
 locations = "21.2.0"
-couchbaseLite = "3.2.0"
+couchbaseLiteEE = "3.2.3"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
 constraintlayout = "2.1.4"
 
@@ -19,7 +19,7 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "maps" }
 locations = { group = "com.google.android.gms", name = "play-services-location", version.ref = "locations" }
-couchbase-lite = { group = "com.couchbase.lite", name = "couchbase-lite-android", version.ref = "couchbaseLite" }
+couchbase-lite-ee = { group = "com.couchbase.lite", name = "couchbase-lite-android-ee", version.ref = "couchbaseLiteEE" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
 [plugins]
