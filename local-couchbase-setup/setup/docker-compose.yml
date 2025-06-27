@@ -1,0 +1,67 @@
+services:
+  couchbase-server:
+    image: couchbase:community
+    container_name: couchbase-server
+    hostname: couchbase-server
+    ports:
+      - "8091:8091"
+      - "8093:8093"
+      - "11210:11210"
+    environment:
+      - COUCHBASE_ADMINISTRATOR_USERNAME=Administrator
+      - COUCHBASE_ADMINISTRATOR_PASSWORD=password
+    healthcheck:
+      # test: ["CMD", "curl", "-fsS", "http://localhost:8091/pools"]
+      test: ["CMD-SHELL", "curl -fsS -u Administrator:password http://localhost:8091/pools/default/buckets/beacon || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  cb-cluster:
+    image: couchbase:community
+    container_name: cb-cluster
+    depends_on:
+      - couchbase-server
+    entrypoint: /bin/sh
+    command: >
+      -c "
+        echo 'Waiting for Couchbase node to be ready...';
+        until curl -sSf http://couchbase-server:8091/pools > /dev/null; do
+          echo 'Waiting for Couchbase...';
+          sleep 5;
+        done;
+        echo 'Couchbase is up, initializing cluster...';
+        /opt/couchbase/bin/couchbase-cli cluster-init -c couchbase-server:8091 --cluster-username Administrator --cluster-password password --cluster-name mycluster --cluster-ramsize 1024 --cluster-index-ramsize 512 --services data,index,query;
+        "
+    restart: "no"
+
+  cb-bucket:
+    image: couchbase:community
+    container_name: cb-bucket
+    depends_on:
+      - cb-cluster
+    entrypoint: /bin/sh
+    command: >
+      -c "
+        echo 'Waiting for Couchbase cluster to be ready...';
+        until curl -u Administrator:password -sSf http://couchbase-server:8091/pools/default > /dev/null; do
+          echo 'Waiting for Cluster...';
+          sleep 5;
+        done;
+        echo 'Cluster is up, initializing bucket...';
+        /opt/couchbase/bin/couchbase-cli bucket-create -c couchbase-server:8091 --username Administrator --password password --bucket beacon --bucket-type couchbase --bucket-ramsize 256 --bucket-replica 1 --enable-flush 1;
+        "
+    restart: "no"
+
+
+  sync-gateway:
+    image: couchbase/sync-gateway:3.2.0-community
+    container_name: sync-gateway
+    depends_on:
+      couchbase-server:
+        condition: service_healthy
+    ports:
+      - "4984:4984"
+      - "4985:4985"
+    volumes:
+      - ./sync-gateway-config.json:/etc/sync_gateway/config.json:ro

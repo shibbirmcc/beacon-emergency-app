@@ -1,0 +1,64 @@
+{
+  "log": ["*"],
+  "use_tls_server": false,
+  "databases": {
+    "beacon": {
+      "server": "http://couchbase-server:8091",
+      "bucket": "beacon",
+      "username": "Administrator",
+      "password": "password",
+      "import_docs": true,
+      "enable_shared_bucket_access": true,
+      "num_index_replicas": 0,
+      "users": {
+        "GUEST": {
+          "disabled": false,
+          "admin_channels": ["*"]
+        }
+      },
+	  "sync": `
+        function (doc, oldDoc) {
+          if (doc.type == "user") {
+            // Assign channels to users based on city and userType
+            if (doc.userType == "requester") {
+              if (doc.city == "Stockholm") {
+                channel("Stockholm_responders");
+              } else if (doc.city == "Gothenburg") {
+                channel("Gothenburg_responders");
+              }
+              channel(doc.userId); // Personal channel for each user (optional)
+            }
+            else if (doc.userType == "responder") {
+              if (doc.city == "Stockholm") {
+                channel("Stockholm_requests");
+              } else if (doc.city == "Gothenburg") {
+                channel("Gothenburg_requests");
+              }
+              channel(doc.userId); // Personal channel for each user (optional)
+            }
+          }
+          else if (doc.type == "emergency_request") {
+            // Assign emergency requests to responders channels by city
+            if (doc.city == "Stockholm") {
+              channel("Stockholm_requests");
+            } else if (doc.city == "Gothenburg") {
+              channel("Gothenburg_requests");
+            }
+            // Assign to requester personal channel (requester can see own requests)
+            if (doc.requested_by) {
+              channel(doc.requested_by.toString());
+            }
+          }
+          else if (doc.type == "responder_info") {
+            // Responder documents can be assigned to requester channels by city
+            if (doc.city == "Stockholm") {
+              channel("Stockholm_responders");
+            } else if (doc.city == "Gothenburg") {
+              channel("Gothenburg_responders");
+            }
+          }
+        }
+      `
+    }
+  }
+}
