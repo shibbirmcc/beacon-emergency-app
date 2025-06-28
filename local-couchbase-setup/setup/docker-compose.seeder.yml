@@ -1,0 +1,9 @@
+services:
+  seeder:
+    image: python:3.10-slim
+    volumes:
+      - ./data-seeder.py:/app/data-seeder.py
+      - ./data:/app/data
+    working_dir: /app
+    command: /bin/sh -c "pip install couchbase && python data-seeder.py beacon couchbase://couchbase-server Administrator password data/users.json data/requests.json"
+    restart: "no"

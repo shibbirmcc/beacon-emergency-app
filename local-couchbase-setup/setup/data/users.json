@@ -1,0 +1,213 @@
+[
+  {
+    "type": "user",
+    "userId": "1",
+    "name": "Uriah Walters",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": { "lat": 59.30239, "lon": 18.12934 },
+    "city": "Stockholm",
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:15:43Z"
+  },
+  {
+    "type": "user",
+    "userId": "2",
+    "name": "Matilda Svensson",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": { "lat": 59.33459, "lon": 18.06324 },
+    "city": "Stockholm",
+    "status": "occupied",
+    "lastUpdated": "2025-06-25T10:05:12Z"
+  },
+  {
+    "type": "user",
+    "userId": "3",
+    "name": "Johan Nilsson",
+    "userType": "requester",
+    "location": { "lat": 59.32932, "lon": 18.06858 },
+    "city": "Stockholm",
+    "status": "active",
+    "lastUpdated": "2025-06-25T10:15:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "4",
+    "name": "Erik Johansson",
+    "userType": "responder",
+    "responderType": "Fire Truck",
+    "location": { "lat": 57.70887, "lon": 11.97456 },
+    "city": "Gothenburg",
+    "status": "available",
+    "lastUpdated": "2025-06-25T09:45:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "5",
+    "name": "Anna Bergström",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": { "lat": 57.70000, "lon": 11.96679 },
+    "city": "Gothenburg",
+    "status": "unavailable",
+    "lastUpdated": "2025-06-25T11:00:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "6",
+    "name": "Lina Andersson",
+    "userType": "requester",
+    "location": { "lat": 57.70307, "lon": 11.95833 },
+    "city": "Gothenburg",
+    "status": "active",
+    "lastUpdated": "2025-06-25T11:15:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "7",
+    "name": "Oskar Larsson",
+    "userType": "responder",
+    "responderType": "Police",
+    "location": { "lat": 59.31342, "lon": 18.07653 },
+    "city": "Stockholm",
+    "status": "available",
+    "lastUpdated": "2025-06-25T11:20:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "8",
+    "name": "Sofia Karlsson",
+    "userType": "requester",
+    "location": { "lat": 59.33600, "lon": 18.05400 },
+    "city": "Stockholm",
+    "status": "active",
+    "lastUpdated": "2025-06-25T11:30:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "9",
+    "name": "Niklas Lund",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": { "lat": 57.71000, "lon": 11.97000 },
+    "city": "Gothenburg",
+    "status": "occupied",
+    "lastUpdated": "2025-06-25T11:35:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "10",
+    "name": "Elin Berg",
+    "userType": "requester",
+    "location": { "lat": 57.70800, "lon": 11.97200 },
+    "city": "Gothenburg",
+    "status": "active",
+    "lastUpdated": "2025-06-25T11:40:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "11",
+    "name": "Henrik Persson",
+    "userType": "responder",
+    "responderType": "Fire Truck",
+    "location": { "lat": 59.32000, "lon": 18.07000 },
+    "city": "Stockholm",
+    "status": "available",
+    "lastUpdated": "2025-06-25T11:45:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "12",
+    "name": "Sara Eriksson",
+    "userType": "requester",
+    "location": { "lat": 59.33100, "lon": 18.06500 },
+    "city": "Stockholm",
+    "status": "active",
+    "lastUpdated": "2025-06-25T11:50:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "13",
+    "name": "Daniel Olsson",
+    "userType": "responder",
+    "responderType": "Doctor",
+    "location": { "lat": 57.70700, "lon": 11.96600 },
+    "city": "Gothenburg",
+    "status": "available",
+    "lastUpdated": "2025-06-25T11:55:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "14",
+    "name": "Emma Lind",
+    "userType": "requester",
+    "location": { "lat": 57.70350, "lon": 11.96500 },
+    "city": "Gothenburg",
+    "status": "active",
+    "lastUpdated": "2025-06-25T12:00:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "15",
+    "name": "Fredrik Andersson",
+    "userType": "responder",
+    "responderType": "Rescue Team",
+    "location": { "lat": 59.33500, "lon": 18.07000 },
+    "city": "Stockholm",
+    "status": "unavailable",
+    "lastUpdated": "2025-06-25T12:05:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "16",
+    "name": "Isabella Sjöberg",
+    "userType": "requester",
+    "location": { "lat": 59.32200, "lon": 18.07500 },
+    "city": "Stockholm",
+    "status": "active",
+    "lastUpdated": "2025-06-25T12:10:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "17",
+    "name": "Lukas Holm",
+    "userType": "responder",
+    "responderType": "Police",
+    "location": { "lat": 57.70950, "lon": 11.97300 },
+    "city": "Gothenburg",
+    "status": "available",
+    "lastUpdated": "2025-06-25T12:15:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "18",
+    "name": "Agnes Blom",
+    "userType": "requester",
+    "location": { "lat": 57.70200, "lon": 11.96000 },
+    "city": "Gothenburg",
+    "status": "active",
+    "lastUpdated": "2025-06-25T12:20:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "19",
+    "name": "Felix Svensson",
+    "userType": "responder",
+    "responderType": "Ambulance",
+    "location": { "lat": 59.31800, "lon": 18.06200 },
+    "city": "Stockholm",
+    "status": "occupied",
+    "lastUpdated": "2025-06-25T12:25:00Z"
+  },
+  {
+    "type": "user",
+    "userId": "20",
+    "name": "Maja Henriksson",
+    "userType": "requester",
+    "location": { "lat": 59.33000, "lon": 18.06400 },
+    "city": "Stockholm",
+    "status": "active",
+    "lastUpdated": "2025-06-25T12:30:00Z"
+  }
+]

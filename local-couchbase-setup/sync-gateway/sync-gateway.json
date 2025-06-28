@@ -50,13 +50,8 @@
 			"user":{"password":"user00", "admin_channels":["*"]}
 		},
 		"sync": `function(doc, oldDoc, meta) {
-			if (doc.type === "user" && doc.userType === "responder") {
-				channel("responder");
-				requireUser(doc.userId);
-			}
-			if (doc.type === "emergency_request") {
-				requireUser(doc.request_by);
-				channel("emergency_" + doc.request_by);
+			if (doc.type === "emergency_request" && ( doc.status === "open" || doc.status === "responded" ) ) {
+				channel("emergency_requests");
 			}
 		}`
 	  }
