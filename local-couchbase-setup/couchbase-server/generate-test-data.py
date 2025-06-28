@@ -1,14 +1,6 @@
 import json
 import random
-from datetime import datetime, UTC
-import bcrypt
-import uuid
-
-# Password as bytes
-password_bytes = "password".encode("utf-8")
-salt = bcrypt.gensalt()
-hashed_password = bcrypt.hashpw(password_bytes, salt)
-hashed_password_str = hashed_password.decode("utf-8")
+from datetime import datetime, timezone
 
 
 names = [
@@ -114,29 +106,19 @@ names = [
     "Vanessa Barker"
 ]
 
-
-# Names for responders
-first_names = [
-    "Alice", "Bob", "Charlie", "David", "Emma", "Frank", "Grace", "Hannah",
-    "Ivan", "Julia", "Kevin", "Laura", "Mike", "Nina", "Oscar", "Paula",
-    "Quentin", "Rachel", "Steve", "Tina", "Ulf", "Vera", "Walter", "Xenia",
-    "Yusuf", "Zara"
-]
-
 responder_types = [
     "Ambulance", "Doctor", "Fire Truck", "Rescue Team", "Generator", "Water Supply"
 ]
 
 # Generate 100 users
 users = []
-credentials = []
 
 for i in range(1, 101):
-    user_id = str(uuid.uuid4())
+    user_id = str(i)
     responder_type = random.choice(responder_types)
     lat = round(random.uniform(59.3000, 59.3700), 6)
     lon = round(random.uniform(18.0200, 18.1500), 6)
-    timestamp = datetime.now(UTC).isoformat()
+    timestamp = datetime.now(timezone.utc).isoformat()
 
     user_doc = {
         "type": "user",
@@ -152,15 +134,7 @@ for i in range(1, 101):
         "lastUpdated": timestamp
     }
 
-    credential_doc = {
-        "type": "user_credentials",
-        "userId": user_id,
-        "username": names[i-1].split(" ")[0].lower(),
-        "password": hashed_password_str
-    }
-
     users.append(user_doc)
-    credentials.append(credential_doc)
 
 
 requester_names = [
@@ -173,10 +147,10 @@ requester_names = [
 
 ## Creating normal users
 for i in range(1, 6):
-    user_id = str(uuid.uuid4())
+    user_id = str(100+i)
     lat = round(random.uniform(59.3000, 59.3700), 6)
     lon = round(random.uniform(18.0200, 18.1500), 6)
-    timestamp = datetime.now(UTC).isoformat()
+    timestamp = datetime.now(timezone.utc).isoformat()
 
     user_doc = {
         "type": "user",
@@ -190,24 +164,11 @@ for i in range(1, 6):
         "status": "available",
         "lastUpdated": timestamp
     }
-
-    credential_doc = {
-        "type": "user_credentials",
-        "userId": user_id,
-        "username": requester_names[i-1].split(" ")[0].lower(),
-        "password": hashed_password_str
-    }
-
     users.append(user_doc)
-    credentials.append(credential_doc)
 
 
 # Write users.json (CBIMPORT format)
 with open("users.json", "w") as f:
     json.dump(users, f, indent=2)
-
-# Write user_credentials.json (CBIMPORT format)
-with open("user_credentials.json", "w") as f:
-    json.dump(credentials, f, indent=2)
 
 print("✅ Generated users.json and user_credentials.json!")
