@@ -1,41 +1,41 @@
 package com.beacon;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.couchbase.lite.*;
 import com.couchbase.lite.Collection;
-import com.couchbase.lite.Dictionary;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.beacon.databinding.ActivityGoogleMapBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.security.cert.Certificate;
 import java.util.*;
 
-public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCallback {
+public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private static final String USER_ID = "99";
+    private static final String USER_TYPE = "responder"; // requester
+    private static final String RESPONDER_TYPE = "Ambulance"; // if we use responder user
 
     private GoogleMap mMap;
     private ActivityGoogleMapBinding binding;
@@ -60,6 +60,8 @@ public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCal
             DatabaseConfiguration config = new DatabaseConfiguration();
             database = new Database("beacon", config);
 
+            deleteCouchbaseLiteDataOnStartup();
+
             startP2pListener();
             startContinuousP2pReplicationToPeers();
             startSyncGatewayReplication();
@@ -74,7 +76,20 @@ public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCal
         mapFragment.getMapAsync(this);
 
         floatingActionButton = findViewById(R.id.fab_add_request);
-        floatingActionButton.setOnClickListener(v -> showEmergencyDialog());
+
+        if(USER_TYPE == "responder"){
+            setTitle("Responder - "+USER_ID);
+            floatingActionButton.setVisibility(View.INVISIBLE);
+            try {
+                startResponderRequestListener(RESPONDER_TYPE, USER_ID);
+            } catch (CouchbaseLiteException e) {
+                e.printStackTrace();
+            }
+        }else {
+            setTitle("Requester - "+USER_ID);
+            floatingActionButton.setVisibility(View.VISIBLE);
+            floatingActionButton.setOnClickListener(v -> showEmergencyDialog());
+        }
     }
 
     @Override
@@ -87,7 +102,6 @@ public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCal
                 if (location != null) {
                     LatLng userLoc = new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLoc, 13));
-                    loadResponders();
                 }
             });
         } else {
@@ -109,30 +123,6 @@ public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCal
         }
     }
 
-    private void loadResponders() {
-        Query query = QueryBuilder.select(SelectResult.all())
-                .from(DataSource.database(database))
-                .where(Expression.property("type").equalTo(Expression.string("user"))
-                        .and(Expression.property("user_type").equalTo(Expression.string("responder"))));
-        try {
-            ResultSet rs = query.execute();
-            for (Result result : rs) {
-                Dictionary user = result.getDictionary("beacon-db");
-                Dictionary location = user.getDictionary("location");
-                String responseType = user.getString("response_type");
-                String status = user.getString("status");
-                LatLng responderLoc = new LatLng(location.getDouble("lat"), location.getDouble("lon"));
-                MarkerOptions markerOptions = new MarkerOptions()
-                        .position(responderLoc)
-                        .title(responseType)
-                        .icon(BitmapDescriptorFactory.defaultMarker(
-                                status.equals("active") ? BitmapDescriptorFactory.HUE_GREEN : BitmapDescriptorFactory.HUE_RED
-                        ));
-                mMap.addMarker(markerOptions);
-            }
-        } catch (CouchbaseLiteException e) { e.printStackTrace(); }
-    }
-
     private void showEmergencyDialog() {
         String[] options = {"Ambulance", "Doctor", "Fire Truck", "Rescue Team", "Generator", "Water Supply"};
         new AlertDialog.Builder(this)
@@ -140,7 +130,6 @@ public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCal
                 .setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, options), (dialog, which) -> {
                     String selected = options[which];
                     saveAndSendEmergencyRequest(selected);
-//                    Toast.makeText(this, "Emergency Request for " + selected + " sent!", Toast.LENGTH_SHORT).show();
                 })
                 .show();
     }
@@ -153,6 +142,7 @@ public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCal
             doc.setString("emergency_type", emergencyType);
             doc.setString("city", "stockholm");
             doc.setString("status", "open");
+            doc.setString("requested_by", USER_ID);
             doc.setLong("requested_at", System.currentTimeMillis());
             collection.save(doc);
             Log.d("EMERGENCY_DOC", "Emergency type: " + doc.getString("emergency_type"));
@@ -187,8 +177,8 @@ public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCal
 
             // Configuring the channel to read from
             CollectionConfiguration collectionConfiguration = new CollectionConfiguration();
-            // TODO: update the channle names once sync-gateway is configured properly with city based channel names
-            collectionConfiguration.setChannels(List.of("stockholm_responders", "stcokholm-requests"));
+            // TODO: update the channel names once sync-gateway is configured properly with city based channel names
+            collectionConfiguration.setChannels(List.of("emergency_requests"));
             // conflict resolver
             collectionConfiguration.setConflictResolver(p2PConflictResolver);
             config.addCollection(collection, collectionConfiguration);
@@ -200,7 +190,7 @@ public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCal
     }
 
     private void startSyncGatewayReplication() throws URISyntaxException, CouchbaseLiteException {
-        URI sgwUri = new URI("wss://172.23.47.108/beacon");
+        URI sgwUri = new URI("ws://172.23.47.108:4984/beacon");
         URLEndpoint endpoint = new URLEndpoint(sgwUri);
         ReplicatorConfiguration config = new ReplicatorConfiguration(endpoint);
         config.addCollection(database.getDefaultCollection(), null);
@@ -219,21 +209,38 @@ public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCal
 
         sgwReplicator = new Replicator(config);
         sgwReplicator.addChangeListener(change -> {
+            ReplicatorStatus status = change.getStatus();
+            Log.i("SGW_REPL", "Activity Level: " + status.getActivityLevel());
+            Log.i("SGW_REPL", "Last Sequence: " + status.getProgress().getCompleted());
+            Log.i("SGW_REPL", String.format("Progress: %d / %d",
+                    status.getProgress().getCompleted(),
+                    status.getProgress().getTotal()));
             if (change.getStatus().getError() != null) {
                 Log.e("SGW_REPL", "Error: " + change.getStatus().getError());
             }
-            Log.i("SGW_REPL", "Status: " + change.getStatus());
         });
         sgwReplicator.start();
     }
 
     private TLSIdentity createServerIdentity() throws CouchbaseLiteException {
+        TLSIdentity existingIdentity = TLSIdentity.getIdentity("server-key");
+        if (existingIdentity != null) {
+            Log.i("TLS_IDENTITY", "Existing server identity found, reusing it");
+            return existingIdentity;
+        }
+
         Map<String, String> attrs = Map.of(TLSIdentity.CERT_ATTRIBUTE_COMMON_NAME, "BeaconServer");
         Calendar cal = Calendar.getInstance(); cal.add(Calendar.YEAR, 5);
         return TLSIdentity.createIdentity(true, attrs, cal.getTime(), "server-key");
     }
 
     private TLSIdentity createClientIdentity() throws CouchbaseLiteException {
+        TLSIdentity existingIdentity = TLSIdentity.getIdentity("client-key");
+        if (existingIdentity != null) {
+            Log.i("TLS_IDENTITY", "Existing client identity found, reusing it");
+            return existingIdentity;
+        }
+
         Map<String, String> attrs = Map.of(TLSIdentity.CERT_ATTRIBUTE_COMMON_NAME, "BeaconClient");
         Calendar cal = Calendar.getInstance(); cal.add(Calendar.YEAR, 5);
         return TLSIdentity.createIdentity(false, attrs, cal.getTime(), "client-key");
@@ -243,15 +250,99 @@ public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCal
         try {
             // Replace with mDNS discovery; this is hardcoded for testing
             // TODO, replace the ip address with the private vpn network's ip address once veryone is connected
-            return List.of(new URI("wss://192.168.1.10:55990/"), new URI("wss://192.168.1.11:55990/"));
+//            return List.of(new URI("wss://192.168.1.10:55990/"), new URI("wss://192.168.1.11:55990/"));
+            return List.of(new URI("wss://100.75.54.36:55990/")); // tailscale vpn, Linux machine IP
         } catch (Exception e) { e.printStackTrace(); }
         return Collections.emptyList();
     }
+
+
+    private void startResponderRequestListener(String responderType, String responderId) throws CouchbaseLiteException {
+        Query query = QueryBuilder
+                .select(SelectResult.expression(Meta.id), SelectResult.all())
+                .from(DataSource.collection(database.getDefaultCollection()))
+                .where(
+                        Expression.property("type").equalTo(Expression.string("emergency_request"))
+                                .and(Expression.property("status").equalTo(Expression.string("open")))
+                                .and(Expression.property("emergency_type").equalTo(Expression.string(responderType)))
+                );
+
+        // Add listener: runs whenever a matching doc changes
+        query.addChangeListener(change -> {
+            for (Result result : change.getResults()) {
+                String docId = result.getString("id");
+                Log.i("RESPONDER", "Matching emergency found: " + docId);
+                runOnUiThread(() -> showResponderNotification(docId, responderId));
+            }
+        });
+    }
+
+
+    private void showResponderNotification(String docId, String responderId) {
+        new AlertDialog.Builder(this)
+                .setTitle("Emergency Request")
+                .setMessage("A new request needs your response. Accept?")
+                .setPositiveButton("Accept", (dialog, which) -> acceptEmergencyRequest(docId, responderId))
+                .setNegativeButton("Reject", (dialog, which) -> Log.i("RESPONDER", "Request rejected"))
+                .show();
+    }
+
+
+    private void acceptEmergencyRequest(String docId, String responderId) {
+        try {
+            Collection collection = database.getDefaultCollection();
+            Document doc = collection.getDocument(docId);
+            if (doc == null) {
+                Log.e("RESPONDER", "Request doc not found: " + docId);
+                return;
+            }
+
+            MutableDocument updated = doc.toMutable();
+            updated.setString("status", "responded");
+            updated.setString("responded_by", responderId);
+            updated.setLong("responded_at", System.currentTimeMillis());
+
+            collection.save(updated);
+            Log.i("RESPONDER", "Accepted request " + docId);
+
+        } catch (CouchbaseLiteException e) {
+            Log.e("RESPONDER", "Error updating request", e);
+        }
+    }
+
+
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         if (sgwReplicator != null) sgwReplicator.stop();
         if (p2pListener != null) p2pListener.stop();
+    }
+
+
+
+    // very dangerous, remember this part before starting the app for demo
+    private void deleteCouchbaseLiteDataOnStartup(){
+        try {
+            Collection collection = database.getDefaultCollection();
+
+            Query allDocs = QueryBuilder
+                    .select(SelectResult.expression(Meta.id))
+                    .from(DataSource.collection(collection));
+
+            ResultSet results = allDocs.execute();
+            int count = 0;
+            for (Result result : results) {
+                String docId = result.getString("id");
+                Document doc = collection.getDocument(docId);
+                collection.delete(doc);
+                count++;
+            }
+            Log.i("DB_RESET", "Deleted " + count + " documents from local database on startup.");
+        } catch (CouchbaseLiteException e) {
+            Log.e("DB_RESET", "Error deleting documents on startup", e);
+        }
+
     }
 }
