@@ -33,6 +33,8 @@ import java.util.*;
 public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private static final String SYNC_GATEWAY_IP = "172.23.47.108"; ///zerotier vpn
+
     private static final String USER_ID = "99";
     private static final String USER_TYPE = "responder"; // requester
     private static final String RESPONDER_TYPE = "Ambulance"; // if we use responder user
@@ -83,12 +85,12 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         floatingActionButton = findViewById(R.id.fab_add_request);
 
         if("responder".equals(USER_TYPE)){
-            setTitle("Responder - "+USER_ID);
             floatingActionButton.setVisibility(View.INVISIBLE);
+            setTitle("Responder - "+USER_ID);
             try {
                 startResponderRequestListener(RESPONDER_TYPE, USER_ID);
             } catch (CouchbaseLiteException e) {
-                e.printStackTrace();
+                Log.e("RESPONDER Request Listener", "Request Listening error", e);
             }
         }else {
             setTitle("Requester - "+USER_ID);
@@ -197,7 +199,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     private void startSyncGatewayReplication() throws URISyntaxException, CouchbaseLiteException {
-        URI sgwUri = new URI("ws://172.23.47.108:4984/beacon");
+        URI sgwUri = new URI("ws://"+SYNC_GATEWAY_IP+":4984/beacon");
         URLEndpoint endpoint = new URLEndpoint(sgwUri);
         ReplicatorConfiguration config = new ReplicatorConfiguration(endpoint);
         config.addCollection(database.getDefaultCollection(), null);
@@ -208,7 +210,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         Collection collection = database.getDefaultCollection();
         CollectionConfiguration collectionConfiguration = new CollectionConfiguration();
         // TODO: update the channle names once sync-gateway is configured properly with city based channel names
-        collectionConfiguration.setChannels(List.of("emergenecy_requests"));
+        collectionConfiguration.setChannels(List.of("emergency_requests"));
         // conflict resolver
         collectionConfiguration.setConflictResolver(syncGatewayConflictResolver);
         config.addCollection(collection, collectionConfiguration);
@@ -273,6 +275,14 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
                                 .and(Expression.property("status").equalTo(Expression.string("open")))
                                 .and(Expression.property("emergency_type").equalTo(Expression.string(responderType)))
                 );
+
+        // 1. Query existing matching documents immediately on startup
+        ResultSet resultSet = query.execute();
+        for (Result result : resultSet) {
+            String docId = result.getString("id");
+            Log.i("RESPONDER", "Matching emergency found on startup: " + docId);
+            runOnUiThread(() -> showResponderNotification(docId, responderId));
+        }
 
         // Add listener: runs whenever a matching doc changes
         query.addChangeListener(change -> {
