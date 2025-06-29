@@ -83,7 +83,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
             try {
                 startResponderRequestListener(RESPONDER_TYPE, USER_ID);
             } catch (CouchbaseLiteException e) {
-                e.printStackTrace();
+                Log.e("RESPONDER", "startResponderRequestListener Error", e);
             }
         }else {
             setTitle("Requester - "+USER_ID);
@@ -183,8 +183,17 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
             collectionConfiguration.setConflictResolver(p2PConflictResolver);
             config.addCollection(collection, collectionConfiguration);
 
+
+
             Replicator repl = new Replicator(config);
-            repl.addChangeListener(change -> Log.i("P2P_REPL", "Status: " + change.getStatus()));
+//            repl.addChangeListener(change -> Log.i("P2P_REPL", "Status: " + change.getStatus()));
+            repl.addChangeListener(change -> {
+                ReplicatorStatus status = change.getStatus();
+                Log.i("P2P_REPLICATOR", "ActivityLevel: " + status.getActivityLevel());
+                if (status.getError() != null) {
+                    Log.e("P2P_REPLICATOR", "Replication error: " + status.getError());
+                }
+            });
             repl.start();
         }
     }
@@ -200,8 +209,8 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         // Configuring the channel to read from
         Collection collection = database.getDefaultCollection();
         CollectionConfiguration collectionConfiguration = new CollectionConfiguration();
-        // TODO: update the channle names once sync-gateway is configured properly with city based channel names
-        collectionConfiguration.setChannels(List.of("stockholm_responders", "stcokholm-requests"));
+        // TODO: update the channel names once sync-gateway is configured properly with city based channel names
+        collectionConfiguration.setChannels(List.of("emergency_requests"));
         // conflict resolver
         collectionConfiguration.setConflictResolver(syncGatewayConflictResolver);
         config.addCollection(collection, collectionConfiguration);
@@ -251,7 +260,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
             // Replace with mDNS discovery; this is hardcoded for testing
             // TODO, replace the ip address with the private vpn network's ip address once veryone is connected
 //            return List.of(new URI("wss://192.168.1.10:55990/"), new URI("wss://192.168.1.11:55990/"));
-            return List.of(new URI("wss://100.75.54.36:55990/")); // tailscale vpn, Linux machine IP
+            return List.of(new URI("ws://100.75.54.36:55990/")); // tailscale vpn, Linux machine IP
         } catch (Exception e) { e.printStackTrace(); }
         return Collections.emptyList();
     }
@@ -267,11 +276,19 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
                                 .and(Expression.property("emergency_type").equalTo(Expression.string(responderType)))
                 );
 
-        // Add listener: runs whenever a matching doc changes
+        // 🔹 1) Execute the query immediately to process existing matching docs
+        ResultSet initialResults = query.execute();
+        for (Result result : initialResults) {
+            String docId = result.getString("id");
+            Log.i("RESPONDER", "[Startup] Found existing emergency: " + docId);
+            runOnUiThread(() -> showResponderNotification(docId, responderId));
+        }
+
+        // 🔹 2) Add live listener to catch new or updated matching docs
         query.addChangeListener(change -> {
             for (Result result : change.getResults()) {
                 String docId = result.getString("id");
-                Log.i("RESPONDER", "Matching emergency found: " + docId);
+                Log.i("RESPONDER", "[ChangeListener] New/changed emergency: " + docId);
                 runOnUiThread(() -> showResponderNotification(docId, responderId));
             }
         });
