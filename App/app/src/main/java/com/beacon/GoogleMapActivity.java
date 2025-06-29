@@ -46,6 +46,8 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
     private URLEndpointListener p2pListener;
     private SyncGatewayConflictResolver syncGatewayConflictResolver = new SyncGatewayConflictResolver();
     private P2PConflictResolver p2PConflictResolver = new P2PConflictResolver();
+    private PeerDiscoveryManager peerDiscovery;
+
 
 
     @Override
@@ -56,6 +58,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         binding = ActivityGoogleMapBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        peerDiscovery = new PeerDiscoveryManager(this);
         try {
             DatabaseConfiguration config = new DatabaseConfiguration();
             database = new Database("beacon", config);
@@ -65,6 +68,8 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
             startP2pListener();
             startContinuousP2pReplicationToPeers();
             startSyncGatewayReplication();
+
+            peerDiscovery.registerService(p2pListener.getPort());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,7 +82,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
         floatingActionButton = findViewById(R.id.fab_add_request);
 
-        if(USER_TYPE == "responder"){
+        if("responder".equals(USER_TYPE)){
             setTitle("Responder - "+USER_ID);
             floatingActionButton.setVisibility(View.INVISIBLE);
             try {
@@ -104,6 +109,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLoc, 13));
                 }
             });
+            peerDiscovery.discoverPeers();
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -116,7 +122,8 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                onMapReady(mMap);
+//                onMapReady(mMap);
+                Log.i("PERMISSION", "Location permission granted");
             } else {
                 Toast.makeText(this, "Location permission is required", Toast.LENGTH_SHORT).show();
             }
@@ -165,7 +172,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
     private void startContinuousP2pReplicationToPeers() throws CouchbaseLiteException {
         TLSIdentity clientIdentity = createClientIdentity();
-        for (URI peerUri : getNearbyPeerUris()) {
+        for (URI peerUri : peerDiscovery.getNearbyPeerUris()) {
             URLEndpoint endpoint = new URLEndpoint(peerUri);
             ReplicatorConfiguration config = new ReplicatorConfiguration(endpoint);
             Collection collection = database.getDefaultCollection();
@@ -201,7 +208,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         Collection collection = database.getDefaultCollection();
         CollectionConfiguration collectionConfiguration = new CollectionConfiguration();
         // TODO: update the channle names once sync-gateway is configured properly with city based channel names
-        collectionConfiguration.setChannels(List.of("stockholm_responders", "stcokholm-requests"));
+        collectionConfiguration.setChannels(List.of("emergenecy_requests"));
         // conflict resolver
         collectionConfiguration.setConflictResolver(syncGatewayConflictResolver);
         config.addCollection(collection, collectionConfiguration);
@@ -246,15 +253,15 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         return TLSIdentity.createIdentity(false, attrs, cal.getTime(), "client-key");
     }
 
-    private List<URI> getNearbyPeerUris() {
-        try {
-            // Replace with mDNS discovery; this is hardcoded for testing
-            // TODO, replace the ip address with the private vpn network's ip address once veryone is connected
-//            return List.of(new URI("wss://192.168.1.10:55990/"), new URI("wss://192.168.1.11:55990/"));
-            return List.of(new URI("wss://100.75.54.36:55990/")); // tailscale vpn, Linux machine IP
-        } catch (Exception e) { e.printStackTrace(); }
-        return Collections.emptyList();
-    }
+//    private List<URI> getNearbyPeerUris() {
+//        try {
+//            // Replace with mDNS discovery; this is hardcoded for testing
+//            // TODO, replace the ip address with the private vpn network's ip address once veryone is connected
+////            return List.of(new URI("wss://192.168.1.10:55990/"), new URI("wss://192.168.1.11:55990/"));
+//            return List.of(new URI("wss://100.75.54.36:55990/")); // tailscale vpn, Linux machine IP
+//        } catch (Exception e) { e.printStackTrace(); }
+//        return Collections.emptyList();
+//    }
 
 
     private void startResponderRequestListener(String responderType, String responderId) throws CouchbaseLiteException {
@@ -343,6 +350,5 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         } catch (CouchbaseLiteException e) {
             Log.e("DB_RESET", "Error deleting documents on startup", e);
         }
-
     }
 }
