@@ -192,8 +192,17 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
             collectionConfiguration.setConflictResolver(p2PConflictResolver);
             config.addCollection(collection, collectionConfiguration);
 
+
+
             Replicator repl = new Replicator(config);
-            repl.addChangeListener(change -> Log.i("P2P_REPL", "Status: " + change.getStatus()));
+//            repl.addChangeListener(change -> Log.i("P2P_REPL", "Status: " + change.getStatus()));
+            repl.addChangeListener(change -> {
+                ReplicatorStatus status = change.getStatus();
+                Log.i("P2P_REPLICATOR", "ActivityLevel: " + status.getActivityLevel());
+                if (status.getError() != null) {
+                    Log.e("P2P_REPLICATOR", "Replication error: " + status.getError());
+                }
+            });
             repl.start();
         }
     }
@@ -209,7 +218,6 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         // Configuring the channel to read from
         Collection collection = database.getDefaultCollection();
         CollectionConfiguration collectionConfiguration = new CollectionConfiguration();
-        // TODO: update the channle names once sync-gateway is configured properly with city based channel names
         collectionConfiguration.setChannels(List.of("emergency_requests"));
         // conflict resolver
         collectionConfiguration.setConflictResolver(syncGatewayConflictResolver);
@@ -255,16 +263,6 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         return TLSIdentity.createIdentity(false, attrs, cal.getTime(), "client-key");
     }
 
-//    private List<URI> getNearbyPeerUris() {
-//        try {
-//            // Replace with mDNS discovery; this is hardcoded for testing
-//            // TODO, replace the ip address with the private vpn network's ip address once veryone is connected
-////            return List.of(new URI("wss://192.168.1.10:55990/"), new URI("wss://192.168.1.11:55990/"));
-//            return List.of(new URI("wss://100.75.54.36:55990/")); // tailscale vpn, Linux machine IP
-//        } catch (Exception e) { e.printStackTrace(); }
-//        return Collections.emptyList();
-//    }
-
 
     private void startResponderRequestListener(String responderType, String responderId) throws CouchbaseLiteException {
         Query query = QueryBuilder
@@ -288,7 +286,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         query.addChangeListener(change -> {
             for (Result result : change.getResults()) {
                 String docId = result.getString("id");
-                Log.i("RESPONDER", "Matching emergency found: " + docId);
+                Log.i("RESPONDER", "[ChangeListener] New/changed emergency: " + docId);
                 runOnUiThread(() -> showResponderNotification(docId, responderId));
             }
         });
