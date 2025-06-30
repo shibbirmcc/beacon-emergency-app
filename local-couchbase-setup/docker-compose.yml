@@ -6,7 +6,7 @@ services:
     image: beacon-couchbase-server:latest
     ports:
      - 8091-8096:8091-8096
-     - 11210:11210
+    #  - 11210:11210
     mem_limit: 8g
     environment:  
       - CLUSTER_NAME=couchbase-cluster-1
@@ -39,7 +39,7 @@ services:
     image: beacon-couchbase-server:latest
     ports:
      - 58091-58096:8091-8096
-     - 51210:11210
+    #  - 51210:11210
     depends_on:
       - couchbase-server
     mem_limit: 8g
@@ -70,57 +70,6 @@ services:
     command: sh -c "/opt/couchbase/init/init-cbserver.sh"
 
 
-
-  # xdcr-setup:
-  #   build: ./xdcr
-  #   container_name: xdcr-setup
-  #   depends_on:
-  #     - couchbase-server
-  #     - couchbase-server-2
-  #   environment:
-  #     - CLUSTER1_URL=http://couchbase-server:8091
-  #     - CLUSTER2_URL=http://couchbase-server-2:8091
-  #     - COUCHBASE_ADMINISTRATOR_USERNAME=Administrator
-  #     - COUCHBASE_ADMINISTRATOR_PASSWORD=admin00
-  #     - COUCHBASE_BUCKET=beacon
-  #   networks:
-  #     - workshop
-  #   volumes:
-  #     - ./xdcr/setup-xdcr.sh:/usr/local/bin/setup-xdcr.sh
-  #   # entrypoint: ["/usr/local/bin/setup-xdcr.sh"]
-  #   entrypoint: ["/bin/bash"]
-
-
-
-  backend:
-    build: ./backend
-    image: beacon-backend:latest
-    container_name: beacon-backend
-    ports:
-      - "5000:5000"
-    depends_on:
-      - couchbase-server
-    environment:
-      - COUCHBASE_HOST=couchbase-server
-      - COUCHBASE_USERNAME=beacon
-      - COUCHBASE_PASSWORD=beacon
-    networks:
-      - workshop
-
-  # tester:
-  #   image: python:3.11-slim
-  #   container_name: couchbase-tester
-  #   command: ["sleep", "3600"]
-  #   depends_on:
-  #     - couchbase-server
-  #   environment:
-  #     - COUCHBASE_HOST=couchbase-server
-  #     - COUCHBASE_USERNAME=beacon
-  #     - COUCHBASE_PASSWORD=beacon
-  #   networks:
-  #     - workshop
-
-
   sync-gateway:
     build: ./sync-gateway
     image: beacon-sync-gateway:latest
@@ -130,6 +79,9 @@ services:
     container_name: sync-gateway
     depends_on:
       - couchbase-server
+      - couchbase-server-2
+    environment:
+      - COUCHBASE_HOST=couchbase-server-2
     working_dir: /docker-syncgateway
     stdin_open: true
     tty: true      

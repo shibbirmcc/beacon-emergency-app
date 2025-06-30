@@ -33,6 +33,8 @@ import java.util.*;
 public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private static final String SYNC_GATEWAY_IP = "172.23.47.108"; ///zerotier vpn
+
     private static final String USER_ID = "99";
     private static final String USER_TYPE = "responder"; // requester
     private static final String RESPONDER_TYPE = "Ambulance"; // if we use responder user
@@ -46,6 +48,8 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
     private URLEndpointListener p2pListener;
     private SyncGatewayConflictResolver syncGatewayConflictResolver = new SyncGatewayConflictResolver();
     private P2PConflictResolver p2PConflictResolver = new P2PConflictResolver();
+    private PeerDiscoveryManager peerDiscovery;
+
 
 
     @Override
@@ -56,6 +60,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         binding = ActivityGoogleMapBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        peerDiscovery = new PeerDiscoveryManager(this);
         try {
             DatabaseConfiguration config = new DatabaseConfiguration();
             database = new Database("beacon", config);
@@ -65,6 +70,8 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
             startP2pListener();
             startContinuousP2pReplicationToPeers();
             startSyncGatewayReplication();
+
+            peerDiscovery.registerService(p2pListener.getPort());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,13 +84,13 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
         floatingActionButton = findViewById(R.id.fab_add_request);
 
-        if(USER_TYPE == "responder"){
-            setTitle("Responder - "+USER_ID);
+        if("responder".equals(USER_TYPE)){
             floatingActionButton.setVisibility(View.INVISIBLE);
+            setTitle("Responder - "+USER_ID);
             try {
                 startResponderRequestListener(RESPONDER_TYPE, USER_ID);
             } catch (CouchbaseLiteException e) {
-                Log.e("RESPONDER", "startResponderRequestListener Error", e);
+                Log.e("RESPONDER Request Listener", "Request Listening error", e);
             }
         }else {
             setTitle("Requester - "+USER_ID);
@@ -104,6 +111,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLoc, 13));
                 }
             });
+            peerDiscovery.discoverPeers();
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -116,7 +124,8 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                onMapReady(mMap);
+//                onMapReady(mMap);
+                Log.i("PERMISSION", "Location permission granted");
             } else {
                 Toast.makeText(this, "Location permission is required", Toast.LENGTH_SHORT).show();
             }
@@ -165,7 +174,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
     private void startContinuousP2pReplicationToPeers() throws CouchbaseLiteException {
         TLSIdentity clientIdentity = createClientIdentity();
-        for (URI peerUri : getNearbyPeerUris()) {
+        for (URI peerUri : peerDiscovery.getNearbyPeerUris()) {
             URLEndpoint endpoint = new URLEndpoint(peerUri);
             ReplicatorConfiguration config = new ReplicatorConfiguration(endpoint);
             Collection collection = database.getDefaultCollection();
@@ -199,7 +208,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     private void startSyncGatewayReplication() throws URISyntaxException, CouchbaseLiteException {
-        URI sgwUri = new URI("ws://172.23.47.108:4984/beacon");
+        URI sgwUri = new URI("ws://"+SYNC_GATEWAY_IP+":4984/beacon");
         URLEndpoint endpoint = new URLEndpoint(sgwUri);
         ReplicatorConfiguration config = new ReplicatorConfiguration(endpoint);
         config.addCollection(database.getDefaultCollection(), null);
@@ -209,7 +218,6 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         // Configuring the channel to read from
         Collection collection = database.getDefaultCollection();
         CollectionConfiguration collectionConfiguration = new CollectionConfiguration();
-        // TODO: update the channel names once sync-gateway is configured properly with city based channel names
         collectionConfiguration.setChannels(List.of("emergency_requests"));
         // conflict resolver
         collectionConfiguration.setConflictResolver(syncGatewayConflictResolver);
@@ -255,16 +263,6 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         return TLSIdentity.createIdentity(false, attrs, cal.getTime(), "client-key");
     }
 
-    private List<URI> getNearbyPeerUris() {
-        try {
-            // Replace with mDNS discovery; this is hardcoded for testing
-            // TODO, replace the ip address with the private vpn network's ip address once veryone is connected
-//            return List.of(new URI("wss://192.168.1.10:55990/"), new URI("wss://192.168.1.11:55990/"));
-            return List.of(new URI("ws://100.75.54.36:55990/")); // tailscale vpn, Linux machine IP
-        } catch (Exception e) { e.printStackTrace(); }
-        return Collections.emptyList();
-    }
-
 
     private void startResponderRequestListener(String responderType, String responderId) throws CouchbaseLiteException {
         Query query = QueryBuilder
@@ -276,15 +274,15 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
                                 .and(Expression.property("emergency_type").equalTo(Expression.string(responderType)))
                 );
 
-        // 🔹 1) Execute the query immediately to process existing matching docs
-        ResultSet initialResults = query.execute();
-        for (Result result : initialResults) {
+        // 1. Query existing matching documents immediately on startup
+        ResultSet resultSet = query.execute();
+        for (Result result : resultSet) {
             String docId = result.getString("id");
-            Log.i("RESPONDER", "[Startup] Found existing emergency: " + docId);
+            Log.i("RESPONDER", "Matching emergency found on startup: " + docId);
             runOnUiThread(() -> showResponderNotification(docId, responderId));
         }
 
-        // 🔹 2) Add live listener to catch new or updated matching docs
+        // Add listener: runs whenever a matching doc changes
         query.addChangeListener(change -> {
             for (Result result : change.getResults()) {
                 String docId = result.getString("id");
@@ -360,6 +358,5 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         } catch (CouchbaseLiteException e) {
             Log.e("DB_RESET", "Error deleting documents on startup", e);
         }
-
     }
 }

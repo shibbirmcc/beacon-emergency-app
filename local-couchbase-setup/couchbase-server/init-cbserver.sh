@@ -110,11 +110,11 @@ EOF
         -d "file:///opt/couchbase/init/users.json" -b $COUCHBASE_BUCKET -g "user::%userId%"
 
 
-      /opt/couchbase/bin/cbimport json --format list \
-        -c http://localhost:8091 \
-        -u $COUCHBASE_ADMINISTRATOR_USERNAME \
-        -p $COUCHBASE_ADMINISTRATOR_PASSWORD \
-        -d "file:///opt/couchbase/init/user_credentials.json" -b $COUCHBASE_BUCKET -g "user_credentials::%userId%"
+      # /opt/couchbase/bin/cbimport json --format list \
+      #   -c http://localhost:8091 \
+      #   -u $COUCHBASE_ADMINISTRATOR_USERNAME \
+      #   -p $COUCHBASE_ADMINISTRATOR_PASSWORD \
+      #   -d "file:///opt/couchbase/init/user_credentials.json" -b $COUCHBASE_BUCKET -g "user_credentials::%userId%"
 
       echo "✅ Sample users and credentials import successfull";
   fi
