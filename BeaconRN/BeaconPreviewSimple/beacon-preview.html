@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beacon Emergency App Preview</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f5f5f5;
+        }
+        
+        #root {
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Simple styling for the preview */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-button {
+            padding: 12px 24px;
+            background: #007AFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .nav-button:hover {
+            background: #0056CC;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            min-height: 500px;
+        }
+        
+        .screen {
+            display: none;
+            text-align: center;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        .button {
+            padding: 16px 32px;
+            margin: 8px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .button-primary {
+            background: #007AFF;
+            color: white;
+        }
+        
+        .button-success {
+            background: #34C759;
+            color: white;
+        }
+        
+        .button-danger {
+            background: #FF3B30;
+            color: white;
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 400px;
+            background: #E8F4FD;
+            border: 2px solid #007AFF;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #007AFF;
+            margin: 20px 0;
+        }
+        
+        .emergency-alert {
+            background: #FFE6E6;
+            border: 2px solid #FF3B30;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .profile-card {
+            background: #F5F5F5;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <h1 style="color: #007AFF; margin: 0 0 10px 0; font-size: 28px;">
+                    🚨 Beacon Emergency App
+                </h1>
+                <p style="color: #666; margin: 0; font-size: 16px;">
+                    React Native to Web Preview - Emergency Response System
+                </p>
+                
+                <!-- Navigation -->
+                <div class="nav">
+                    <button class="nav-button" onclick="showScreen('onboarding')">📱 Onboarding</button>
+                    <button class="nav-button" onclick="showScreen('map')">🗺️ Map View</button>
+                    <button class="nav-button" onclick="showScreen('emergency')">🚨 Emergency</button>
+                    <button class="nav-button" onclick="showScreen('profile')">👤 Profile</button>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="content">
+                <!-- Onboarding Screen -->
+                <div id="onboarding" class="screen active">
+                    <h2 style="color: #333; margin-bottom: 20px;">Welcome to Beacon</h2>
+                    <p style="color: #666; margin-bottom: 40px;">
+                        Emergency response app for connecting those who need help with those who can help.
+                    </p>
+                    
+                    <div style="max-width: 400px; margin: 0 auto;">
+                        <h3>Choose your role:</h3>
+                        <button class="button button-primary" style="display: block; width: 100%; margin: 16px auto;">
+                            <div style="font-weight: bold;">I need help</div>
+                            <div style="font-size: 14px; opacity: 0.8;">Request emergency assistance</div>
+                        </button>
+                        
+                        <button class="button button-success" style="display: block; width: 100%; margin: 16px auto;">
+                            <div style="font-weight: bold;">I can help</div>
+                            <div style="font-size: 14px; opacity: 0.8;">Respond to emergency requests</div>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Map Screen -->
+                <div id="map" class="screen">
+                    <h2 style="color: #333; margin-bottom: 20px;">Emergency Map</h2>
+                    <div class="map-placeholder">
+                        🗺️ Interactive Map View<br />
+                        (Shows emergency locations and responders)
+                    </div>
+                    <p style="color: #666;">
+                        This map would show real-time locations of emergency requests and available responders.
+                    </p>
+                </div>
+                
+                <!-- Emergency Screen -->
+                <div id="emergency" class="screen">
+                    <h2 style="color: #FF3B30; margin-bottom: 20px;">Emergency Request</h2>
+                    <div class="emergency-alert">
+                        <p style="color: #FF3B30; font-weight: bold; font-size: 18px; margin: 0 0 10px 0;">
+                            🚨 Emergency in Progress
+                        </p>
+                        <p style="color: #666; margin: 0;">
+                            Location: Stockholm, Sweden<br />
+                            Type: Medical Emergency<br />
+                            Status: Help on the way
+                        </p>
+                    </div>
+                    
+                    <button class="button button-danger" style="margin-top: 20px;">
+                        Cancel Emergency Request
+                    </button>
+                </div>
+                
+                <!-- Profile Screen -->
+                <div id="profile" class="screen">
+                    <h2 style="color: #333; margin-bottom: 20px;">User Profile</h2>
+                    <div class="profile-card">
+                        <div style="font-size: 48px; margin-bottom: 10px;">👤</div>
+                        <h3 style="color: #333; margin: 10px 0;">Demo User</h3>
+                        <p style="color: #666; margin: 5px 0;">Emergency Responder</p>
+                        <p style="color: #666; margin: 5px 0;">Medical Professional</p>
+                    </div>
+                    
+                    <div style="max-width: 300px; margin: 20px auto;">
+                        <button class="button button-primary" style="width: 100%; margin: 8px 0;">
+                            Edit Profile
+                        </button>
+                        
+                        <button class="button button-success" style="width: 100%; margin: 8px 0;">
+                            Set Availability
+                        </button>
+                        
+                        <button style="width: 100%; margin: 8px 0; padding: 12px; background: #FF9500; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            Emergency Settings
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div style="background: #333; color: white; padding: 20px; text-align: center; margin-top: 40px; border-radius: 12px;">
+                <p style="margin: 0;">
+                    Beacon Emergency App - React Native Migration Preview
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showScreen(screenName) {
+            // Hide all screens
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => screen.classList.remove('active'));
+            
+            // Show selected screen
+            document.getElementById(screenName).classList.add('active');
+        }
+        
+        // Add some interactivity
+        console.log('Beacon Emergency App Preview Loaded');
+    </script>
+</body>
+</html>
